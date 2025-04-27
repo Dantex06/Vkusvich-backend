@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 import { CommentDto } from '../comments/dto';
+import { CategoryDto } from '../categories/dto';
 
 export class RecipeDto {
   @ApiProperty()
@@ -13,16 +14,28 @@ export class RecipeDto {
   description: string;
 
   @ApiProperty()
+  stars: number;
+
+  @ApiProperty()
+  cost: number;
+
+  @ApiProperty()
+  timeCooking: number;
+
+  @ApiProperty()
   ownerId: number;
 
   @ApiProperty()
-  imageUrl?: string;
+  imageUrl: string;
 
   @ApiProperty()
   likes: number;
 
   @ApiProperty()
   comments: CommentDto[];
+
+  @ApiProperty()
+  categories: CategoryDto[];
 
   @ApiProperty()
   createdAt: Date;
@@ -48,10 +61,22 @@ export class CreateRecipeDto {
   ownerId: number;
 
   @ApiProperty({
+    example: 20,
+  })
+  @IsNotEmpty()
+  timeCooking: number;
+
+  @ApiProperty({
+    example: 1200,
+  })
+  @IsNotEmpty()
+  cost: number;
+
+  @ApiProperty({
     example:
       'https://i.pinimg.com/736x/40/2e/6e/402e6e3ef8f455fddfdaaf50b57d8585.jpg',
   })
-  imageUrl?: string;
+  imageUrl: string;
 }
 
 export class DeleteRecipeDto {
@@ -90,4 +115,11 @@ export class PatchRecipeDto {
   })
   @IsOptional()
   description?: string;
+
+  @ApiProperty({
+    example:
+      'https://i.pinimg.com/736x/40/2e/6e/402e6e3ef8f455fddfdaaf50b57d8585.jpg',
+  })
+  @IsOptional()
+  imageUrl?: string;
 }

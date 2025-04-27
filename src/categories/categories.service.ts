@@ -6,10 +6,11 @@ import { CategoryDto } from './dto';
 export class CategoriesService {
   constructor(private dbService: DbService) {}
 
-  async create(name: string): Promise<CategoryDto> {
+  async create(name: string, imageUrl: string): Promise<CategoryDto> {
     const category = await this.dbService.category.create({
       data: {
         name,
+        imageUrl,
         recipes: { create: [] },
       },
     });

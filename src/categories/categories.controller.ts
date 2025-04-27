@@ -12,7 +12,7 @@ export class CategoriesController {
   @Post('create')
   @ApiCreatedResponse()
   create(@Body() body: CreateCategoryDto): Promise<CategoryDto> {
-    return this.categoriesService.create(body.name);
+    return this.categoriesService.create(body.name, body.imageUrl);
   }
 
   @Post('delete')

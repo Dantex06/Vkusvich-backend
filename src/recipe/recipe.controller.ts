@@ -37,6 +37,8 @@ export class RecipeController {
       body.title,
       body.description,
       body.ownerId,
+      body.timeCooking,
+      body.cost,
       body.imageUrl,
     );
   }

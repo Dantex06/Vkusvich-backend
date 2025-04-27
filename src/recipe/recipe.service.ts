@@ -21,7 +21,9 @@ export class RecipeService {
     title: string,
     description: string,
     ownerId: number,
-    imageUrl?: string,
+    timeCooking: number,
+    cost: number,
+    imageUrl: string,
   ): Promise<RecipeDto> {
     const recipe = await this.dbService.recipe.create({
       data: {
@@ -29,15 +31,20 @@ export class RecipeService {
         description,
         imageUrl,
         ownerId,
+        timeCooking,
+        cost,
         likes: 0,
+        stars: 0,
         comments: { create: [] },
         createdAt: new Date(),
+        categories: { create: [] },
       },
     });
 
     return {
       ...recipe,
       comments: [],
+      categories: [],
       createdAt: new Date(),
     };
   }
@@ -48,6 +55,7 @@ export class RecipeService {
       data: {
         title: patch.title,
         description: patch.description,
+        imageUrl: patch.imageUrl,
       },
     });
   }

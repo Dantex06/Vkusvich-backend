@@ -45,12 +45,16 @@ model Recipe {
   id Int @id @default(autoincrement())
   title String
   description String
+  stars Int
+  cost Int
+  timeCooking Int
   owner Account @relation(fields: [ownerId], references: [id])
   ownerId Int
-  imageUrl String?
+  imageUrl String
   likes Int
   comments Comment[]
   categories Category[]
+  topics Topic[]
   createdAt DateTime
 }
 
@@ -67,5 +71,19 @@ model Comment {
 model Category {
   id Int @id @default(autoincrement())
   name String
+  imageUrl String?
   recipes Recipe[]
+}
+
+model Topic {
+  id Int @id @default(autoincrement())
+  recipe Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId Int?
+}
+
+model News {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  imageUrl String
 }
